@@ -9,15 +9,17 @@ function filterByString(field, filterValue) {
 }
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) ?? []
+  );
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const storedContacts = localStorage.getItem('contacts');
-    if (storedContacts) {
-      setContacts(JSON.parse(storedContacts));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedContacts = localStorage.getItem('contacts');
+  //   if (storedContacts) {
+  //     setContacts(JSON.parse(storedContacts));
+  //   }
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
